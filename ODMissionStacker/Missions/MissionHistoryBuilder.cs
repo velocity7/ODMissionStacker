@@ -60,6 +60,11 @@ namespace ODMissionStacker.Missions
 
         private string CurrentStarSystem = "";
 
+        private void OnFSDJumpEvent(object sender, FSDJumpEvent.FSDJumpEventArgs e)
+        {
+            CurrentStarSystem = e.StarSystem;
+        }
+
         private void OnLocationEvent(object sender, LocationEvent.LocationEventArgs e)
         {
             CurrentStarSystem = e.StarSystem;
@@ -323,11 +328,6 @@ namespace ODMissionStacker.Missions
                                                            x.Value.TargetFaction == e.VictimFaction 
                                                             && x.Value.CurrentState == MissionState.Active && x.Value.DestinationSystem == e.StarSystem).Value;
 
-                if (String.IsNullOrWhiteSpace(e.StarSystem))
-                {
-                    int j = 0;
-                }
-
                 if (mission == default)
                 {
                     continue;
@@ -370,6 +370,8 @@ namespace ODMissionStacker.Missions
 
             watcher.GetEvent<LocationEvent>()?.AddHandler(OnLocationEvent);
 
+            watcher.GetEvent<FSDJumpEvent>()?.AddHandler(OnFSDJumpEvent);
+
             watcher.GetEvent<DockedEvent>()?.AddHandler(OnDockedAtStation);
 
             watcher.GetEvent<UndockedEvent>()?.AddHandler(OnUndockedFromStation);
@@ -396,6 +398,8 @@ namespace ODMissionStacker.Missions
             watcher.GetEvent<CommanderEvent>()?.RemoveHandler(OnCommanderEvent);
 
             watcher.GetEvent<LocationEvent>()?.RemoveHandler(OnLocationEvent);
+
+            watcher.GetEvent<FSDJumpEvent>()?.RemoveHandler(OnFSDJumpEvent);
 
             watcher.GetEvent<DockedEvent>()?.RemoveHandler(OnDockedAtStation);
 

@@ -14,6 +14,7 @@ namespace ODMissionStacker.Missions
             VictimFaction = args.VictimFaction;
             TotalReward = args.TotalReward;
             TimeSinceLastKill = timeSinceLastKill;
+            StarSystem = args.StarSystem;
         }
         public DateTime TimeStamp { get; set; }
         public TimeSpan TimeSinceLastKill { get; set; }

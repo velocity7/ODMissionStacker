@@ -311,6 +311,11 @@
                                             Width="SizeToCells"
                                             HeaderStyle="{DynamicResource HeaderLeft}"
                                             Binding="{Binding TargetFaction}" />
+                        <DataGridTextColumn Header="TARGET SYSTEM"
+                                            MinWidth="130"
+                                            Width="SizeToCells"
+                                            HeaderStyle="{DynamicResource HeaderLeft}"
+                                            Binding="{Binding DestinationSystem}" />
                         <DataGridTemplateColumn  MinWidth="100">
                             <DataGridTemplateColumn.Header>
                                 <Grid VerticalAlignment="Center"
@@ -451,6 +456,11 @@
                                                 MaxWidth="200"
                                                 HeaderStyle="{DynamicResource HeaderLeft}"
                                                 Binding="{Binding VictimFaction}" />
+                            <DataGridTextColumn Header="SYSTEM"
+                                                Width="200"
+                                                MaxWidth="200"
+                                                HeaderStyle="{DynamicResource HeaderLeft}"
+                                                Binding="{Binding StarSystem}" />
                             <DataGridTextColumn Header="REWARD"
                                                 Width="90"
                                                 Binding="{Binding TotalReward,StringFormat={}{0:N0} cr}">                                

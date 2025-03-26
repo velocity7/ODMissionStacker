@@ -455,11 +455,6 @@ namespace ODMissionStacker.Missions
 
                 MissionData mission = faction.Missions.FirstOrDefault(x => x.CurrentState == MissionState.Active && x.DestinationSystem == data.StarSystem);
 
-                if (String.IsNullOrWhiteSpace(data.StarSystem))
-                {
-                    int i = 0;
-                }
-
                 if (mission == default)
                 {
                     continue;
