@@ -88,6 +88,8 @@ namespace ODMissionStacker.Missions
 
             JournalWatcher.GetEvent<FSDJumpEvent>()?.AddHandler(OnFSDJumpEvent);
 
+            JournalWatcher.GetEvent<CarrierJumpEvent>()?.AddHandler(OnCarrierJumpEvent);
+
             JournalWatcher.GetEvent<DockedEvent>()?.AddHandler(OnDockedAtStation);
 
             JournalWatcher.GetEvent<UndockedEvent>()?.AddHandler(OnUndockedFromStation);
@@ -118,6 +120,8 @@ namespace ODMissionStacker.Missions
             JournalWatcher.GetEvent<LocationEvent>()?.RemoveHandler(OnLocationEvent);
 
             JournalWatcher.GetEvent<FSDJumpEvent>()?.RemoveHandler(OnFSDJumpEvent);
+
+            JournalWatcher.GetEvent<CarrierJumpEvent>()?.RemoveHandler(OnCarrierJumpEvent);
 
             JournalWatcher.GetEvent<DockedEvent>()?.RemoveHandler(OnDockedAtStation);
 
@@ -211,6 +215,14 @@ namespace ODMissionStacker.Missions
         private void OnFSDJumpEvent(object sender, FSDJumpEvent.FSDJumpEventArgs e)
         {
             CurrentStarSystem = e.StarSystem;
+        }
+
+        private void OnCarrierJumpEvent(object sender, CarrierJumpEvent.CarrierJumpEventArgs e)
+        {
+            if (e.Docked)
+            {
+                CurrentStarSystem = e.StarSystem;
+            }
         }
 
         private void OnLocationEvent(object sender, LocationEvent.LocationEventArgs e)
