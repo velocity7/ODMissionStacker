@@ -208,6 +208,11 @@ namespace ODMissionStacker.Missions
                     continue;
                 }
 
+                if (mission.KillCount == mission.Kills)
+                {
+                    continue;
+                }
+
                 killsRemaining.Add(mission.KillCount - mission.Kills);
             }
 

@@ -189,7 +189,7 @@ namespace ODMissionStacker.Missions
                 return;
             }
 
-            var gameversion = Version.Parse(e.gameversion);
+            var gameversion = Version.Parse(e.GameVersion);
 
             CurrentGameMode = gameversion.Major >= 4 ? GameVersion.Live : GameVersion.Legacy;
         }
@@ -202,8 +202,12 @@ namespace ODMissionStacker.Missions
             }           
         }
 
+        private string CurrentStarSystem = "";
+
         private void OnLocationEvent(object sender, LocationEvent.LocationEventArgs e)
         {
+            CurrentStarSystem = e.StarSystem;
+
             if (JournalWatcher.ReadingHistory)
             {
                 return;
@@ -471,7 +475,7 @@ namespace ODMissionStacker.Missions
             {
                 var mis = missions.FirstOrDefault(x => x.MissionID == mission.MissionID);
 
-                if (mis is null)
+                if (mis.Equals(default(Mission)))
                 {
                     missionsToRemove.Add(mission);
                 }
@@ -490,6 +494,8 @@ namespace ODMissionStacker.Missions
 
         private void OnBoutnyEvent(object sender, BountyEvent.BountyEventArgs e)
         {
+            e.StarSystem = CurrentStarSystem;
+
             //Ignore skimmers, ground and zero value bounties.
             if (JournalWatcher.IsLive == false || e.VictimFaction.Contains("faction_none") || e.VictimFaction.Contains("faction_Pirate") || e.Target.Contains("suit") || e.TotalReward <= 0)
             {
@@ -504,6 +510,7 @@ namespace ODMissionStacker.Missions
             }
 
             BountyData data = new(e, timeSinceLastKill);
+            data.StarSystem = CurrentStarSystem;
 
             AddBounty(data);
             MissionsManager missionsManager = CurrentGameMode switch

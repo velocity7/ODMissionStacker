@@ -35,7 +35,7 @@ namespace ODMissionStacker.Missions
 
         private void OnFileHeaderEvent(object sender, FileheaderEvent.FileheaderEventArgs e)
         {
-            var gameversion = Version.Parse(e.gameversion);
+            var gameversion = Version.Parse(e.GameVersion);
 
             CurrentGameMode = gameversion.Major >= 4 ? GameVersion.Live : GameVersion.Legacy;
         }
@@ -58,8 +58,12 @@ namespace ODMissionStacker.Missions
             handleLogs = e.FID.Equals(commanderFid);
         }
 
+        private string CurrentStarSystem = "";
+
         private void OnLocationEvent(object sender, LocationEvent.LocationEventArgs e)
         {
+            CurrentStarSystem = e.StarSystem;
+
             if (handleLogs == false)
             {
                 return;
@@ -263,7 +267,7 @@ namespace ODMissionStacker.Missions
             {
                 var mis = missions.FirstOrDefault(x => x.MissionID == mission);
 
-                if (mis is null)
+                if (mis.Equals(default(Mission)))
                 {
                     dict[mission].CurrentState = MissionState.Complete;
                 }
@@ -296,7 +300,10 @@ namespace ODMissionStacker.Missions
                 timeSinceLastKill = e.Timestamp - bountiesData[^1].TimeStamp;
             }
 
-            bountiesData.Add(new BountyData(e,timeSinceLastKill));
+            BountyData d = new BountyData(e, timeSinceLastKill);
+            d.StarSystem = CurrentStarSystem;
+
+            bountiesData.Add(d);
 
             if (bountiesData.Count > 20)
             {
@@ -314,7 +321,12 @@ namespace ODMissionStacker.Missions
 
                 MissionData mission = dict.FirstOrDefault(x => x.Value.IssuingFaction == faction.IssuingFaction &&
                                                            x.Value.TargetFaction == e.VictimFaction 
-                                                            && x.Value.CurrentState == MissionState.Active).Value;
+                                                            && x.Value.CurrentState == MissionState.Active && x.Value.DestinationSystem == e.StarSystem).Value;
+
+                if (String.IsNullOrWhiteSpace(e.StarSystem))
+                {
+                    int j = 0;
+                }
 
                 if (mission == default)
                 {

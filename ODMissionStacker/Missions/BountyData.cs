@@ -20,5 +20,7 @@ namespace ODMissionStacker.Missions
         public string Target { get; set; }
         public string VictimFaction { get; set; }
         public int TotalReward { get; set; }
+
+        public string StarSystem { get; set; }
     }
 }
