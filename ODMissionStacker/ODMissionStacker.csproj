@@ -7,6 +7,8 @@
     <ApplicationIcon>target.ico</ApplicationIcon>
     <AssemblyName>ODMissionStacker</AssemblyName>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <AssemblyVersion>1.8.0.0</AssemblyVersion>
+    <FileVersion>1.8.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
