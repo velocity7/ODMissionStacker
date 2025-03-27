@@ -1,11 +1,20 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Windows;
 
 namespace ODMissionStacker.Utils
 {
     public class Helpers
     {
+        public static string GetBaseDirectory()
+        {
+            string value = AppContext.BaseDirectory;
+            return value;
+        }
+
         public static void SetClipboard(object data)
         {
             try

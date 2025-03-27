@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -24,11 +25,11 @@ namespace ODMissionStacker.Missions
         }
 
         #region Private Values
-        private string LegacyDataSaveFile => Path.Combine(Directory.GetCurrentDirectory(), "Data", $"[{CommanderFID}] LegacyMissions.json");
-        private string LiveDataSaveFile => Path.Combine(Directory.GetCurrentDirectory(), "Data", $"[{CommanderFID}] LiveMissions.json");
+        private string LegacyDataSaveFile => Path.Combine(Helpers.GetBaseDirectory(), "Data", $"[{CommanderFID}] LegacyMissions.json");
+        private string LiveDataSaveFile => Path.Combine(Helpers.GetBaseDirectory(), "Data", $"[{CommanderFID}] LiveMissions.json");
 
-        private static readonly string clipboarDataSaveFile = Path.Combine(Directory.GetCurrentDirectory(), "Data", "MissionSourceClipboard.json");
-        private string BountyDataSaveFile => Path.Combine(Directory.GetCurrentDirectory(), "Data", $"[{CommanderFID}] BountyData.json");
+        private static readonly string clipboarDataSaveFile = Path.Combine(Helpers.GetBaseDirectory(), "Data", "MissionSourceClipboard.json");
+        private string BountyDataSaveFile => Path.Combine(Helpers.GetBaseDirectory(), "Data", $"[{CommanderFID}] BountyData.json");
 
         //private bool odyssey;
 

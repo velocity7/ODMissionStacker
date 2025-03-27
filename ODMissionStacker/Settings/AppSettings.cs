@@ -3,6 +3,7 @@ using ODMissionStacker.Utils;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Windows;
 
@@ -12,7 +13,7 @@ namespace ODMissionStacker.Settings
     {
         public event EventHandler CommanderChanged;
 
-        private readonly string settingsSaveFile = Path.Combine(Directory.GetCurrentDirectory(), "Data", "AppSettingsv2.json");
+        private readonly string settingsSaveFile = Path.Combine(Helpers.GetBaseDirectory(), "Data", "AppSettingsv2.json");
         private string defaultJournalPath = null;
 
         private DisplayMode viewDisplayMode;
